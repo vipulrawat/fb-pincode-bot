@@ -8,6 +8,12 @@ Messenger bots uses a web server to process messages it receives or to figure ou
 ## You'll get this
 ![Final screen](https://raw.githubusercontent.com/vipulrawat/fb-pincode-bot/master/assets/demo_gif.gif "Final screen demo")
 
+## Features
+
+* User can type in any format (uppercase, lowercase, jumbledcase).
+* Both SubPostOffices and BranchOffice are fully Covered.
+* All pincodes are trusted as the API is of Indian Government itself.
+
 ## Pre-requisites
 
 * We will use Node.js along with the express framework to build our server. Ensure that you have Node installed on your computer, do this by running `node-v` in the terminal. If you do not have Node installed you can get it from https://nodejs.org
