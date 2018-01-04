@@ -108,7 +108,7 @@ function titleCase(str) {
   return str.join(' ');
 }
 // Function to extract the pincode of the place
-function getPinDetail(senderId, placeName) {
+function getPinDetail(senderId, placeName) {                //Function to get Pincode of all SubPostOffices
   showTypingIndicatorToUser(senderId, true);
   placeName=titleCase(placeName);
   placeName = placeName+' S.O'; //Every PostOffice in the city is either a SubPost-Office (S.O) or Branch-Office (B.O)
@@ -120,9 +120,11 @@ function getPinDetail(senderId, placeName) {
         let newplaceName = placeName.slice(0,-3)+'B.O';
           getPinDetailNew(senderId,newplaceName);
       }else{
-        json = json.records[0].pincode;
+        let state = json.records[0].statename;    //State Name
+        state = JSON.stringify(state);
+        json = json.records[0].pincode;           //Pincode
         json= JSON.stringify(json);
-        let msg = `Pincode of `+placeName+` is:`+json;
+        let msg = `Pincode of `+placeName+`,`+state+` is:`+json;
           showTypingIndicatorToUser(senderId, true);
           sendMessageToUser(senderId, msg);
           showTypingIndicatorToUser(senderId, false);
@@ -135,7 +137,7 @@ function getPinDetail(senderId, placeName) {
     }
   });
 }
-function getPinDetailNew(senderId, placeName) {
+function getPinDetailNew(senderId, placeName) {                     //Function to get Pincode of all BranchOffices
   showTypingIndicatorToUser(senderId, true);
   let restUrl = PIN_API_URL+placeName;
   request.get(restUrl, (err, response, body) => {
@@ -146,9 +148,11 @@ function getPinDetailNew(senderId, placeName) {
         sendMessageToUser(senderId, "I am unable to get your pincode. Pincode is alloted to the nearest PostOffice Name not the city/place.Try Again!");
         showTypingIndicatorToUser(senderId, false);
       }else{
-        json = json.records[0].pincode;
+        let state = json.records[0].statename;    //State Name
+        state = JSON.stringify(state);
+        json = json.records[0].pincode;           //Pincode
         json= JSON.stringify(json);
-        let msg = `Pincode of `+placeName+` is:`+json;
+        let msg = `Pincode of `+placeName+`,`+state+` is:`+json;
           showTypingIndicatorToUser(senderId, true);
           sendMessageToUser(senderId, msg);
           showTypingIndicatorToUser(senderId, false);
